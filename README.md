@@ -1,6 +1,6 @@
 <img src=".docs/brawlstars.jpg" width="128px" align="right"/>
 
-# 🤠 Brawl Analytics
+# Brawl Analytics
 By Anthony Vilarim Caliani
 
 [![#](https://img.shields.io/badge/licence-MIT-lightseagreen.svg)](#)
