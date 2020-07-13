@@ -16,6 +16,9 @@ I'm a [Supercell](https://supercell.com/en/) fan and then I decided to develop t
 ## Quick Start
 ```bash
 # 404 - Quick Start not found!
+docker-compose build
+docker-compose up -d
+docker-compose exec bs-analytics /app/app-processor/run.sh
 ```
 
 ## Screenshot
