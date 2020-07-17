@@ -14,16 +14,32 @@ I'm a [Supercell](https://supercell.com/en/) fan and then I decided to develop t
 
 
 ## Quick Start
+
+Let's prepare our local environment...
 ```bash
-# 404 - Quick Start not found!
+# First, build docker image...
 docker-compose build
+# Then, start docker container...
 docker-compose up -d
+# When you finish, shutdown the container...
+docker-compose down
+```
+
+### Executing Jobs Locally
+App Collector
+```bash
 docker-compose exec bs-analytics /app/app-collector/run.sh
+```
+App Ingestor
+```bash
 docker-compose exec bs-analytics /app/app-ingestor/run.sh
+```
+App Processor
+```bash
 docker-compose exec bs-analytics /app/app-processor/run.sh
 ```
 
-## Screenshot
+## Screenshots
 ![screenshot](.docs/screenshot.png)
 
 
