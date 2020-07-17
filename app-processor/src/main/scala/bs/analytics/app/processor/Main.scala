@@ -7,5 +7,6 @@ object Main {
     val spark = SparkSession.builder().getOrCreate()
     println(s"Spark Version: ${spark.version}")
     spark.close()
+    sys.exit(0)
   }
 }
