@@ -11,14 +11,13 @@ def main():
     args = arguments.get()
     log.init(APP_NAME, APP_VERSION, args.log_path)
     logging.info(f'Arguments: {args}')
-    print('App Collector Works!')
+    logging.info('App Collector Works!')  # FIXME: Remove this log
+    exit(0)
 
 
 if __name__ == "__main__":
-    status = 0
     try:
         main()
     except Exception as ex:
-        print(f'FATAL! {ex}')
-        status = 1
-    exit(status)
+        logging.critical(f'Exception: {ex}')
+        exit(1)
