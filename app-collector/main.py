@@ -2,7 +2,7 @@
 import logging
 from sys import exit
 
-from utils import arguments, log
+from utils import arguments, log, collector
 
 APP_NAME, APP_VERSION = 'app-collector', '1.0.0-ALPHA'
 
@@ -11,7 +11,7 @@ def main():
     args = arguments.get()
     log.init(APP_NAME, APP_VERSION, args.log_path)
     logging.info(f'Arguments: {args}')
-    logging.info('App Collector Works!')  # FIXME: Remove this log
+    collector.run(args)
     exit(0)
 
 
