@@ -34,9 +34,12 @@ pip3 install -q -r requirements.txt \
 
 if [[ "$env" == "local" ]]; then
   mkdir -p "$OUTPUT_PATH" "$LOG_PATH"
+  mv $tmp_output_path/* $OUTPUT_PATH/
+  mv $tmp_log_path/* $LOG_PATH/
+else
+  gsutil -m mv $tmp_output_path/* $OUTPUT_PATH/
+  gsutil -m mv $tmp_log_path/* $LOG_PATH/
 fi
 
-cp -r $tmp_output_path/* $OUTPUT_PATH/
-cp -r $tmp_log_path/* $LOG_PATH/
 
 cd - && exit "$status"

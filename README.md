@@ -39,6 +39,21 @@ App Processor
 docker-compose exec bs-analytics /app/app-processor/run.sh
 ```
 
+
+## GCloud
+Let's prepare the GCLoud environment...
+
+### First Deploy
+```bash
+TODO: here
+```
+
+### Software Update Deploy
+```bash
+TODO: here
+```
+
+
 ## Screenshots
 ![screenshot](.docs/screenshot.png)
 

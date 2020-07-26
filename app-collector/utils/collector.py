@@ -34,11 +34,11 @@ def request(api_url, api_token, api_retry, user_tag):
     }
     for i in range(int(api_retry)):
         response = requests.get(url, headers=headers)
-        logging.info(f'[{i + 1}][{user_tag}] Response code: {response.status_code}')
+        logging.info(f'[{user_tag}][{i + 1}] Response code: {response.status_code}')
         if response.status_code == 200:
             return response.json()
         else:
-            logging.warning(f'[{i + 1}][{user_tag}] Waiting to try again...')
+            logging.warning(f'[{user_tag}][{i + 1}] Waiting to try again...')
             sleep(5)
     return None
 
