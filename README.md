@@ -44,8 +44,13 @@ docker-compose exec bstars /app/app-processor/run.sh
 Let's prepare the GCLoud environment...
 
 ### First Deploy
+
+Creating Buckets
 ```bash
-TODO: here
+./devops/storage.sh --create bstars-logs
+./devops/storage.sh --create bstars-repo
+./devops/storage.sh --create bstars-transient
+./devops/storage.sh --create bstars-raw
 ```
 
 ### Software Update Deploy
