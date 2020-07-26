@@ -1,8 +1,8 @@
 version: '3'
 services:
-  bs-analytics:
+  bstars:
     user: root
-    container_name: bstars-analytics
+    container_name: bstars
     build:
       context: .
     image: bstars-analytics

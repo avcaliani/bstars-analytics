@@ -1,6 +1,6 @@
 <img src=".docs/brawlstars.jpg" width="128px" align="right"/>
 
-# BS Analytics
+# BStars Analytics
 By Anthony Vilarim Caliani
 
 ![#](https://img.shields.io/badge/licence-MIT-lightseagreen.svg)
@@ -28,15 +28,15 @@ docker-compose down
 ### Executing Jobs Locally
 App Collector
 ```bash
-docker-compose exec bs-analytics /app/app-collector/run.sh
+docker-compose exec bstars /app/app-collector/run.sh
 ```
 App Ingestor
 ```bash
-docker-compose exec bs-analytics /app/app-ingestor/run.sh
+docker-compose exec bstars /app/app-ingestor/run.sh
 ```
 App Processor
 ```bash
-docker-compose exec bs-analytics /app/app-processor/run.sh
+docker-compose exec bstars /app/app-processor/run.sh
 ```
 
 
