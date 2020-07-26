@@ -47,8 +47,9 @@ Let's prepare the GCLoud environment...
 
 Creating Buckets
 ```bash
-./devops/storage.sh --create bstars-logs
 ./devops/storage.sh --create bstars-repo
+./devops/storage.sh --create bstars-airflow
+./devops/storage.sh --create bstars-logs
 ./devops/storage.sh --create bstars-transient
 ./devops/storage.sh --create bstars-raw
 ```
