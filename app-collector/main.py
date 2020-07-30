@@ -4,7 +4,7 @@ from sys import exit
 
 from utils import arguments, log, collector
 
-APP_NAME, APP_VERSION = 'app-collector', '1.0.0-ALPHA'
+APP_NAME, APP_VERSION = 'app-collector', '1.0.0'
 
 
 def main():
