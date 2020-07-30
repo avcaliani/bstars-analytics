@@ -55,7 +55,15 @@ Creating Buckets
 
 Deploying Apps
 ```bash
-# TODO: Do it...
+./devops/app-deploy.sh app-collector
+# TODO: app-ingestor
+# TODO: app-processor
+```
+
+Creating Compute Instance
+```bash
+./devops/ip-address.sh --create  # Region: us-central1 && Save the IP Address
+./devops/compute.sh --create 127.0.0.1  # Generated IP Address
 ```
 
 Creating Airflow service and importing DAGs
