@@ -27,11 +27,11 @@ do
         rm -rf target || true
         mkdir -p target \
             && cp compute-engine/vm-init.sh target/ \
-            && sed -i -e "s/@@PROJECT_ID@@/$PROJECT_ID/g"               target/vm-init.sh \
-            && sed -i -e "s/@@ZONE@@/$ZONE/g"                           target/vm-init.sh \
-            && sed -i -e "s/@@APP_COLLECTOR_VM@@/$APP_COLLECTOR_VM/g"   target/vm-init.sh \
-            && sed -i -e "s/@@APP_COLLECTOR_ZIP@@/$APP_COLLECTOR_ZIP/g" target/vm-init.sh \
-            && sed -i -e "s/@@REPO_BUCKET@@/$REPO_BUCKET/g"             target/vm-init.sh \
+            && sed -i -e "s/@@PROJECT_ID@@/$PROJECT_ID/g"                           target/vm-init.sh \
+            && sed -i -e "s/@@ZONE@@/$ZONE/g"                                       target/vm-init.sh \
+            && sed -i -e "s/@@APP_COLLECTOR_INSTANCE@@/$APP_COLLECTOR_INSTANCE/g"   target/vm-init.sh \
+            && sed -i -e "s/@@APP_COLLECTOR_ZIP@@/$APP_COLLECTOR_ZIP/g"             target/vm-init.sh \
+            && sed -i -e "s/@@REPO_BUCKET@@/$REPO_BUCKET/g"                         target/vm-init.sh \
             && ls -l target
 
         printf "\n$OK Compressing...\n"

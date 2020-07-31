@@ -44,7 +44,9 @@ def request(api_url, api_token, api_retry, user_tag):
 
 
 def save(data, output_path, user_tag):
-    file_name = f'{output_path}/{user_tag}-{datetime.utcnow().strftime("%Y%m%d%H%M%S")}.json'
+    now = datetime.utcnow()
+    file_name = f'{output_path}/{user_tag}-{now.strftime("%Y%m%d%H%M%S")}.json'
     logging.info(f'Writing file "{file_name}"')
     with open(file_name, 'w') as outfile:
+        data['consulted_on'] = now.strftime("%Y-%m-%d %H:%M:%S")
         json.dump(data, outfile)

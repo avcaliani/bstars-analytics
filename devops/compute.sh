@@ -22,9 +22,9 @@ do
     case $arg in
 
         --create)
-        printf "$OK Creating VM '$APP_COLLECTOR_VM'...\n"
-        gcloud compute instances create "$APP_COLLECTOR_VM" \
-            --machine-type "n1-standard-1" \
+        printf "$OK Creating VM '$APP_COLLECTOR_INSTANCE'...\n"
+        gcloud compute instances create "$APP_COLLECTOR_INSTANCE" \
+            --machine-type "f1-micro" \
             --image-family "ubuntu-2004-lts" \
             --image-project "ubuntu-os-cloud" \
             --boot-disk-size "100GB" \
@@ -38,30 +38,30 @@ do
         ;;
 
         --delete)
-        printf "$OK Deleting VM '$APP_COLLECTOR_VM'...\n"
-        gcloud compute instances delete "$APP_COLLECTOR_VM" --zone "$ZONE" --project "$PROJECT_ID"
+        printf "$OK Deleting VM '$APP_COLLECTOR_INSTANCE'...\n"
+        gcloud compute instances delete "$APP_COLLECTOR_INSTANCE" --zone "$ZONE" --project "$PROJECT_ID"
         shift
         ;;
 
         --start)
-        printf "$OK Starting VM '$APP_COLLECTOR_VM'...\n"
-        gcloud compute instances start "$APP_COLLECTOR_VM" --zone "$ZONE" --project "$PROJECT_ID"
+        printf "$OK Starting VM '$APP_COLLECTOR_INSTANCE'...\n"
+        gcloud compute instances start "$APP_COLLECTOR_INSTANCE" --zone "$ZONE" --project "$PROJECT_ID"
         shift
         ;;
 
         --stop)
-        printf "$OK Stopping VM '$APP_COLLECTOR_VM'...\n"
-        gcloud compute instances stop "$APP_COLLECTOR_VM" --zone "$ZONE" --project "$PROJECT_ID"
+        printf "$OK Stopping VM '$APP_COLLECTOR_INSTANCE'...\n"
+        gcloud compute instances stop "$APP_COLLECTOR_INSTANCE" --zone "$ZONE" --project "$PROJECT_ID"
         shift
         ;;
 
         --ssh)
-        gcloud compute ssh "$APP_COLLECTOR_VM" --zone "$ZONE" --project "$PROJECT_ID"
+        gcloud compute ssh "$APP_COLLECTOR_INSTANCE" --zone "$ZONE" --project "$PROJECT_ID"
         shift
         ;;
 
         --serial-output)
-        gcloud compute instances tail-serial-port-output "$APP_COLLECTOR_VM" --zone "$ZONE" --project "$PROJECT_ID"
+        gcloud compute instances tail-serial-port-output "$APP_COLLECTOR_INSTANCE" --zone "$ZONE" --project "$PROJECT_ID"
         shift
         ;;
 

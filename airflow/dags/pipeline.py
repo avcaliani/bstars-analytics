@@ -7,7 +7,7 @@ from airflow.contrib.operators.gcp_compute_operator import GceInstanceStartOpera
 
 PROJECT_ID = environ.get('PROJECT_ID')
 ZONE = environ.get('ZONE')
-APP_COLLECTOR_VM = environ.get('APP_COLLECTOR_VM')
+APP_COLLECTOR_INSTANCE = environ.get('APP_COLLECTOR_INSTANCE')
 
 INTERVAL = '@daily'
 YESTERDAY = datetime.now() - timedelta(days=1)
@@ -29,12 +29,12 @@ with DAG('pipeline', default_args=ARGS, schedule_interval=INTERVAL, catchup=Fals
         task_id='app-collector-start',
         project_id=PROJECT_ID,
         zone=ZONE,
-        resource_id=APP_COLLECTOR_VM
+        resource_id=APP_COLLECTOR_INSTANCE
     )
     app_collector_wait = BashOperator(
         task_id='app-collector-wait',
         bash_command=(
-            f'gcloud compute instances tail-serial-port-output "{APP_COLLECTOR_VM}" '
+            f'gcloud compute instances tail-serial-port-output "{APP_COLLECTOR_INSTANCE}" '
             f'--zone "{ZONE}" '
             f'--project "{PROJECT_ID}" '
             f'|| true'

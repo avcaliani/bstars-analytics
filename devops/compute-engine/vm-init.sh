@@ -10,7 +10,7 @@
 # ./vm-init.sh
 PROJECT_ID="@@PROJECT_ID@@"
 ZONE="@@ZONE@@"
-APP_COLLECTOR_VM="@@APP_COLLECTOR_VM@@"
+APP_COLLECTOR_INSTANCE="@@APP_COLLECTOR_INSTANCE@@"
 APP_COLLECTOR_ZIP="@@APP_COLLECTOR_ZIP@@"
 REPO_BUCKET="@@REPO_BUCKET@@"
 
@@ -27,7 +27,7 @@ rm -rf /app \
 
 echo "Shutting down..." \
     && sleep 60 \
-    && gcloud compute instances stop "$APP_COLLECTOR_VM" \
+    && gcloud compute instances stop "$APP_COLLECTOR_INSTANCE" \
         --zone "$ZONE" \
         --project "$PROJECT_ID"
 

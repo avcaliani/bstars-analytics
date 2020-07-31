@@ -30,7 +30,7 @@ do
             --machine-type "n1-standard-1" \
             --disk-size "100GB" \
             --node-count "3" \
-            --env-variables "PROJECT_ID=$PROJECT_ID,ZONE=$ZONE,APP_COLLECTOR_VM=$APP_COLLECTOR_VM" \
+            --env-variables "PROJECT_ID=$PROJECT_ID,ZONE=$ZONE,APP_COLLECTOR_INSTANCE=$APP_COLLECTOR_INSTANCE" \
             --project "$PROJECT_ID" 
         
         shift; shift
