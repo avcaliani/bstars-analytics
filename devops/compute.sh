@@ -27,7 +27,7 @@ do
             --machine-type "f1-micro" \
             --image-family "ubuntu-2004-lts" \
             --image-project "ubuntu-os-cloud" \
-            --boot-disk-size "100GB" \
+            --boot-disk-size "30GB" \
             --boot-disk-type "pd-standard" \
             --address "$2" \
             --scopes "cloud-platform" \
