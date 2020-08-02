@@ -66,15 +66,11 @@ Creating Compute Instance
 ./devops/compute.sh --create 127.0.0.1  # Generated IP Address
 ```
 
-Creating Airflow service and importing DAGs
+Creating Cloud Pub/Sub Topic, Cloud Function, and Cloud Scheduler services
 ```bash
-./devops/cloud-composer.sh --create bstars-airflow
-./devops/cloud-composer.sh --dag-import bstars-airflow $(pwd)/airflow/dags/pipeline.py
-```
-
-### Software Update Deploy
-```bash
-TODO: here
+./devops/pubsub.sh --create
+./devops/function.sh --create start-instance
+./devops/schedule.sh --create
 ```
 
 
