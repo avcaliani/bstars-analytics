@@ -1,3 +1,6 @@
+# DEPRECATED
+# This approach was temporarily stopped by financial health reasons.
+# However, this approach may be restored in the future.
 from os import environ
 from datetime import datetime, timedelta
 
