@@ -26,15 +26,21 @@ docker-compose down
 ```
 
 ### Executing Jobs Locally
-App Collector
+
+#### App Collector
+> **💡 Hint!**<br>
+> Before executing, set the `API_TOKEN` value in `app-collector/env/local.env`.<br>
+> The token can be found at [Brawl Stars Developer API](https://developer.brawlstars.com/).
 ```bash
 docker-compose exec bstars /app/app-collector/run.sh
 ```
-App Ingestor
+
+#### App Ingestor
 ```bash
 docker-compose exec bstars /app/app-ingestor/run.sh
 ```
-App Processor
+
+#### App Processor
 ```bash
 docker-compose exec bstars /app/app-processor/run.sh
 ```
