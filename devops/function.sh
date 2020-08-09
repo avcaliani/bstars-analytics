@@ -35,7 +35,7 @@ do
         ;;
 
         --delete)
-        printf "$OK Deleting Scheduler '$2'...\n"
+        printf "$OK Deleting function '$2'...\n"
         gcloud functions delete "$2" --region "$REGION" --project "$PROJECT_ID"
         shift; shift
         ;;
