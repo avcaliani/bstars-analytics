@@ -1,6 +1,6 @@
 <img src=".docs/brawlstars.jpg" width="128px" align="right"/>
 
-# BS Analytics
+# BStars Analytics
 By Anthony Vilarim Caliani
 
 ![#](https://img.shields.io/badge/licence-MIT-lightseagreen.svg)
@@ -26,18 +26,59 @@ docker-compose down
 ```
 
 ### Executing Jobs Locally
-App Collector
+
+#### App Collector
+> **💡 Hint!**<br>
+> Before executing, set the `API_TOKEN` value in `app-collector/env/local.env`.<br>
+> The token can be found at [Brawl Stars Developer API](https://developer.brawlstars.com/).
 ```bash
-docker-compose exec bs-analytics /app/app-collector/run.sh
+docker-compose exec bstars /app/app-collector/run.sh
 ```
-App Ingestor
+
+#### App Ingestor
 ```bash
-docker-compose exec bs-analytics /app/app-ingestor/run.sh
+docker-compose exec bstars /app/app-ingestor/run.sh
 ```
-App Processor
+
+#### App Processor
 ```bash
-docker-compose exec bs-analytics /app/app-processor/run.sh
+docker-compose exec bstars /app/app-processor/run.sh
 ```
+
+
+## GCloud
+Let's prepare the GCLoud environment...
+
+### First Deploy
+
+Creating Buckets
+```bash
+./devops/storage.sh --create bstars-repo
+./devops/storage.sh --create bstars-logs
+./devops/storage.sh --create bstars-transient
+./devops/storage.sh --create bstars-raw
+```
+
+Deploying Apps
+```bash
+./devops/app-deploy.sh app-collector
+# TODO: app-ingestor
+# TODO: app-processor
+```
+
+Creating Compute Instance
+```bash
+./devops/ip-address.sh --create  # Region: us-central1 && Save the IP Address
+./devops/compute.sh --create 127.0.0.1  # Generated IP Address
+```
+
+Creating Cloud Pub/Sub Topic, Cloud Function, and Cloud Scheduler services
+```bash
+./devops/pubsub.sh --create
+./devops/function.sh --create start-instance
+./devops/schedule.sh --create
+```
+
 
 ## Screenshots
 ![screenshot](.docs/screenshot.png)

@@ -1,0 +1,6 @@
+.gcloudignore
+.gitignore
+*.sh
+.idea
+.venv
+.vscode

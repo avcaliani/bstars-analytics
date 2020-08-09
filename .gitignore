@@ -1,2 +1,5 @@
+# Dev Stuff
+lake
+
 # OS Files
-.DS_Store
+*.DS_Store
