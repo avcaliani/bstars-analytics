@@ -6,10 +6,12 @@ ENV PATH="${GRADLE_HOME}/bin:${PATH}"
 
 ENV SPARK_HOME="/opt/spark"
 ENV SPARK_VERSION="3.0.0"
-ENV HADOOP_VERSION="2.7"
+ENV HADOOP_VERSION="3.2"
 ENV PATH="${SPARK_HOME}/bin:${PATH}"
 
 ENV PYTHON3_VERSION="3.8.2"
+
+ENV GCP_PROJECT_ID="bstars-analytics"
 
 WORKDIR /opt
 
@@ -22,23 +24,19 @@ ADD "https://downloads.apache.org/spark/spark-${SPARK_VERSION}/spark-${SPARK_VER
 RUN tar -xzf spark*.tgz && rm -f spark*.tgz && mv spark* spark
 
 # Python 3
-RUN apt-get update -qq
-RUN apt-get install -qqy software-properties-common \
-    build-essential \
-    zlib1g-dev \
-    libncurses5-dev \
-    libgdbm-dev \
-    libnss3-dev \
-    libssl-dev \
-    libreadline-dev \
-    libffi-dev \
-    wget
+RUN apt-get update -qq && apt-get install -qqy python3 python3-pip
 
-ADD "https://www.python.org/ftp/python/${PYTHON3_VERSION}/Python-${PYTHON3_VERSION}.tgz" .
-RUN tar -xzf Python*.tgz && rm -f Python*.tgz && mv Python* Python
-RUN cd Python \
-    && ./configure --enable-optimizations > py-configure.log 2>&1 \
-    && make install > py-install.log 2>&1 \
-    && cd -
+# GCloud
+RUN echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" \
+    | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list \
+    && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg \
+    | apt-key --keyring /usr/share/keyrings/cloud.google.gpg  add - \
+    && apt-get update -y \
+    && apt-get install -y google-cloud-sdk
+
+# Adding GCloud Service Account Key
+ADD devops/target/*-key.json .
+RUN gcloud auth activate-service-account --key-file $(basename *-key.json)
+RUN gcloud config set project $GCP_PROJECT_ID
 
 CMD tail -f /dev/null

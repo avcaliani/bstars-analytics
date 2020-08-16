@@ -17,7 +17,9 @@ I'm a [Supercell](https://supercell.com/en/) fan and then I decided to develop t
 
 Let's prepare our local environment...
 ```bash
-# First, build docker image...
+# First, to interact with GCloud we have to create a Service Account
+./devops/service-account.sh --create sa-airflow
+# Then, build docker image...
 docker-compose build
 # Then, start docker container...
 docker-compose up -d
@@ -35,14 +37,10 @@ docker-compose down
 docker-compose exec bstars /app/app-collector/run.sh
 ```
 
-#### App Ingestor
-```bash
-docker-compose exec bstars /app/app-ingestor/run.sh
-```
-
 #### App Processor
 ```bash
-docker-compose exec bstars /app/app-processor/run.sh
+docker-compose exec bstars /app/app-processor/run.sh raw
+docker-compose exec bstars /app/app-processor/run.sh trusted
 ```
 
 
