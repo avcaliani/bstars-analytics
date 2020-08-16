@@ -14,16 +14,24 @@ I'm a [Supercell](https://supercell.com/en/) fan and then I decided to develop t
 
 
 ## Quick Start
-
-Let's prepare our local environment...
+Let's prepare our local environment.  
+First, to interact with GCloud we have to create a Service Account.
 ```bash
-# First, to interact with GCloud we have to create a Service Account
 ./devops/service-account.sh --create sa-airflow
-# Then, build docker image...
+```
+
+Then, build docker image...
+```bash
 docker-compose build
-# Then, start docker container...
+```
+
+Finally, start docker container.
+```bash
 docker-compose up -d
-# When you finish, shutdown the container...
+```
+
+When you finish, shutdown the container.
+```bash
 docker-compose down
 ```
 
@@ -60,7 +68,6 @@ Creating Buckets
 Deploying Apps
 ```bash
 ./devops/app-deploy.sh app-collector
-# TODO: app-ingestor
 # TODO: app-processor
 ```
 
