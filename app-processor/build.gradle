@@ -1,10 +1,11 @@
 plugins {
-    id 'java'
-    id 'scala'
+    id "java"
+    id "scala"
+    id "net.saliman.properties" version "1.5.1"
 }
 
-group 'bs.analytics'
-version '1.0.0-ALFA'
+group "br.bstars.analytics"
+version "1.0.0"
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -14,12 +15,18 @@ repositories {
 }
 
 dependencies {
-    implementation "org.scala-lang:scala-library:2.11.12"
+    implementation "org.scala-lang:scala-library:2.12.10"
     implementation "org.apache.spark:spark-core_2.12:3.0.0"
     implementation "org.apache.spark:spark-sql_2.12:3.0.0"
+    testImplementation "com.holdenkarau:spark-testing-base_2.12:2.4.5_0.14.0"
+}
+
+if (project.hasProperty("env")) {
+    println "Target environment: $env"
+    sourceSets.main.resources.srcDir "src/main/resources/$env"
 }
 
 jar {
-    manifest { attributes "Main-Class": "bs.analytics.app.processor.Main" }
+    manifest { attributes "Main-Class": "br.bstars.analytics.app.processor.Main" }
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
 }
