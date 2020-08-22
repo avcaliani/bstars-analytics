@@ -21,6 +21,11 @@ cd ${PROJECT_DIR} \
 
 status=0
 jar_file=$(ls "$PROJECT_DIR"/build/libs/*.jar)
-spark-submit --master local "$jar_file" "$@" || status=1
+spark-submit \
+  --master local \
+  --name "bstars-app-processor" \
+  --files log4j.properties \
+  --driver-java-options "-Dlog4j.configuration=file:log4j.properties" \
+  "$jar_file" "$@" || status=1
 
 cd - && exit "$status"
