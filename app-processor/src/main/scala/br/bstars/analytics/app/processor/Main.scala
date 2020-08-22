@@ -1,9 +1,13 @@
 package br.bstars.analytics.app.processor
 
+import br.bstars.analytics.app.processor.pipeline.PipelineFactory
 import br.bstars.analytics.app.processor.util.Props
 import org.apache.spark.sql.SparkSession
 import org.slf4j.LoggerFactory
 
+/**
+ * Application main class.
+ */
 object Main {
 
   private val log = LoggerFactory.getLogger(getClass)
@@ -24,13 +28,11 @@ object Main {
     val spark = SparkSession.builder().getOrCreate()
     try {
       describe(spark, args)
-      // TODO: Process
-    } catch {
-      case ex: Exception =>
-        log.error("Unknown Error!", ex)
+      PipelineFactory.instance(spark, args(0)).run()
     }
-    spark.close()
-    sys.exit(0)
+    finally {
+      spark.close()
+    }
   }
 
   private def describe(spark: SparkSession, args: Array[String]): Unit = {

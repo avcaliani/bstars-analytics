@@ -5,7 +5,8 @@ import java.util.Properties
 import scala.util.Try
 
 /**
- * Properties Trait.
+ * Properties Object.
+ * This object represents all properties defined on properties file.
  */
 object Props extends Serializable {
 
@@ -16,8 +17,8 @@ object Props extends Serializable {
   }
 
   /**
-   * Return a property value based on property {@code key}.
-   * It throws an {@link RuntimeException} if property key doesn't exist.
+   * Return a property value based on property "key".
+   * It throws an exception if property key doesn't exist.
    *
    * @param key Property Key.
    * @return Property Value.
