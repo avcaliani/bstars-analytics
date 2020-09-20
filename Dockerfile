@@ -20,7 +20,7 @@ ADD "https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip"
 RUN unzip -q gradle*.zip && rm -f gradle*.zip && mv gradle* gradle
 
 # Spark
-ADD "https://downloads.apache.org/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz" .
+ADD "https://archive.apache.org/dist/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz" .
 RUN tar -xzf spark*.tgz && rm -f spark*.tgz && mv spark* spark
 
 # Python 3

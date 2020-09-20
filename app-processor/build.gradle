@@ -15,9 +15,12 @@ repositories {
 }
 
 dependencies {
-    implementation "org.scala-lang:scala-library:2.12.10"
-    implementation "org.apache.spark:spark-core_2.12:3.0.0"
-    implementation "org.apache.spark:spark-sql_2.12:3.0.0"
+    // Scala Stuff
+    compileOnly "org.scala-lang:scala-library:2.12.10"
+    // Spark Stuff
+    compileOnly "org.apache.spark:spark-core_2.12:3.0.0"
+    compileOnly "org.apache.spark:spark-sql_2.12:3.0.0"
+    // Test Stuff
     testImplementation "com.holdenkarau:spark-testing-base_2.12:2.4.5_0.14.0"
 }
 
@@ -26,7 +29,14 @@ if (project.hasProperty("env")) {
     sourceSets.main.resources.srcDir "src/main/resources/$env"
 }
 
-jar {
-    manifest { attributes "Main-Class": "br.bstars.analytics.app.processor.Main" }
-    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+/**
+ * This task creates a Jar file with all dependencies.
+ */
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Main-Class': "br.bstars.analytics.app.processor.Main"
+    }
+    baseName project.name + '-all'
+    from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
 }

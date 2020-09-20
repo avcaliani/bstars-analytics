@@ -1,6 +1,7 @@
 package br.bstars.analytics.app.processor.pipeline
 
 import br.bstars.analytics.app.processor.pipeline.raw.RawPipeline
+import br.bstars.analytics.app.processor.pipeline.refined.RefinedPipeline
 import br.bstars.analytics.app.processor.pipeline.trusted.TrustedPipeline
 import org.apache.spark.sql.SparkSession
 
@@ -23,6 +24,7 @@ object PipelineFactory {
     name match {
       case "RAW"     => new RawPipeline(spark)
       case "TRUSTED" => new TrustedPipeline(spark)
+      case "REFINED" => new RefinedPipeline(spark)
       case _         => throw new RuntimeException(s"Pipeline name is not valid! [$name]")
     }
   }

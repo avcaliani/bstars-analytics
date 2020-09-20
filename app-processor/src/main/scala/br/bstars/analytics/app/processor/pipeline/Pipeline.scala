@@ -1,6 +1,6 @@
 package br.bstars.analytics.app.processor.pipeline
 
-import org.slf4j.LoggerFactory
+import org.slf4j.{Logger, LoggerFactory}
 
 /**
  * Pipeline Trait.
@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory
  */
 trait Pipeline {
 
-  protected val log = LoggerFactory.getLogger(getClass)
+  protected val log: Logger = LoggerFactory.getLogger(getClass)
 
   /**
    * Execute pipeline steps.

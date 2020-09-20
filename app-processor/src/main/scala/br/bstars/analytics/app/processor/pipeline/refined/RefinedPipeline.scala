@@ -1,23 +1,22 @@
-package br.bstars.analytics.app.processor.pipeline.trusted
+package br.bstars.analytics.app.processor.pipeline.refined
 
 import br.bstars.analytics.app.processor.pipeline.Pipeline
 import br.bstars.analytics.app.processor.util.Props
 import org.apache.spark.sql.SparkSession
 
 /**
- * Trusted Pipeline process.
- * This class will process data from raw zone to trusted zone.
+ * Refined Pipeline process.
+ * This class will process data from trusted zone to refined zone.
  *
  * @param spark Spark Session.
  */
-class TrustedPipeline(spark: SparkSession) extends Pipeline {
+class RefinedPipeline(spark: SparkSession) extends Pipeline {
 
-  private val RAW_USERS = Props.get("datalake.raw.users")
   private val TRUSTED_USERS = Props.get("datalake.trusted.users")
+  private val REFINED_USERS = Props.get("datalake.refined.users")
 
   override def run(): Unit = {
     // TODO: Implement it.
     log.info(s"Starting '${getClass.getSimpleName}'...")
-    spark.read.json(RAW_USERS).show()
   }
 }

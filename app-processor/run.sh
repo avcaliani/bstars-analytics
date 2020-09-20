@@ -12,15 +12,17 @@
 #
 # @usage
 # ./run.sh [ local | prod ] [ raw | trusted ]
-PROJECT_DIR="$(dirname $0)"
+PROJECT_PATH="$(dirname $0)"
 
-cd ${PROJECT_DIR} \
+# Building Project
+cd $PROJECT_PATH \
   && rm -rf build \
-  && ./gradlew clean build test -Penv="$1" \
+  && gradle clean build test fatJar -Penv="$1" \
   && shift
 
+# Executing Project
 status=0
-jar_file=$(ls "$PROJECT_DIR"/build/libs/*.jar)
+jar_file=$(ls $PROJECT_PATH/build/libs/*-all*.jar)
 spark-submit \
   --master local \
   --name "bstars-app-processor" \

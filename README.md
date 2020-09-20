@@ -47,6 +47,7 @@ docker-compose exec bstars /app/app-collector/run.sh
 
 #### App Processor
 ```bash
+docker-compose exec bstars /app/app-processor/scripts/get-files.sh
 docker-compose exec bstars /app/app-processor/run.sh local raw
 docker-compose exec bstars /app/app-processor/run.sh local trusted
 ```
@@ -68,7 +69,6 @@ Creating Buckets
 Deploying Apps
 ```bash
 ./devops/app-deploy.sh app-collector
-# TODO: app-processor
 ```
 
 Creating Compute Instance
