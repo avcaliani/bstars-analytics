@@ -16,7 +16,13 @@ class RefinedPipeline(spark: SparkSession) extends Pipeline {
   private val REFINED_USERS = Props.get("datalake.refined.users")
 
   override def run(): Unit = {
-    // TODO: Implement it.
-    log.info(s"Starting '${getClass.getSimpleName}'...")
+    spark.read
+      .parquet(TRUSTED_USERS)
+      .coalesce(1)
+      .write
+      .mode("overwrite")
+      .option("header", "true")
+      .csv(REFINED_USERS)
   }
+
 }

@@ -28,7 +28,9 @@ object Main {
     val spark = SparkSession.builder().getOrCreate()
     try {
       describe(spark, args)
+      log.info(s"Starting '${args(0)}'...")
       PipelineFactory.instance(spark, args(0)).run()
+      log.info(s"The process has been finished!")
     }
     finally {
       spark.close()

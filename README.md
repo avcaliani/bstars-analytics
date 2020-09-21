@@ -50,6 +50,8 @@ docker-compose exec bstars /app/app-collector/run.sh
 docker-compose exec bstars /app/app-processor/scripts/get-files.sh
 docker-compose exec bstars /app/app-processor/run.sh local raw
 docker-compose exec bstars /app/app-processor/run.sh local trusted
+docker-compose exec bstars /app/app-processor/run.sh local refined
+docker-compose exec bstars /app/app-processor/scripts/single-file.sh
 ```
 
 

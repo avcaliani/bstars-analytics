@@ -12,19 +12,16 @@ import org.apache.spark.sql.SparkSession
  */
 class RawPipeline(spark: SparkSession) extends Pipeline {
 
-  private val PIPELINE_NAME = getClass.getSimpleName
   private val TRANSIENT_USERS = Props.get("datalake.transient.users")
   private val RAW_USERS = Props.get("datalake.raw.users")
 
   override def run(): Unit = {
-    log.info(s"Starting $PIPELINE_NAME...")
     spark.read
       .option("mode", "DROPMALFORMED")
       .json(TRANSIENT_USERS)
       .write
       .mode("overwrite")
       .json(RAW_USERS)
-    log.info(s"$PIPELINE_NAME finished!")
   }
 
 }
