@@ -47,10 +47,19 @@ docker-compose exec bstars /app/app-collector/run.sh
 
 #### App Processor
 ```bash
+# 01 - Get files from GCloud
 docker-compose exec bstars /app/app-processor/scripts/get-files.sh
+
+# 02 - Process files from transient zone
 docker-compose exec bstars /app/app-processor/run.sh local raw
+
+# 03 - Process files from raw zone
 docker-compose exec bstars /app/app-processor/run.sh local trusted
+
+# 04 - Process files from trusted zone
 docker-compose exec bstars /app/app-processor/run.sh local refined
+
+# 05 - Rename final file and put it into analytics zone
 docker-compose exec bstars /app/app-processor/scripts/single-file.sh
 ```
 
@@ -65,7 +74,6 @@ Creating Buckets
 ./devops/storage.sh --create bstars-repo
 ./devops/storage.sh --create bstars-logs
 ./devops/storage.sh --create bstars-transient
-./devops/storage.sh --create bstars-raw
 ```
 
 Deploying Apps
