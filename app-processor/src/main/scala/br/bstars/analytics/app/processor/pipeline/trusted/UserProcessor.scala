@@ -2,8 +2,8 @@ package br.bstars.analytics.app.processor.pipeline.trusted
 
 import br.bstars.analytics.app.processor.data.User
 import br.bstars.analytics.app.processor.util.Props
-import org.apache.spark.sql.DataFrame
-import org.apache.spark.sql.functions.{col, regexp_replace}
+import org.apache.spark.sql.functions.{col, lit, regexp_replace}
+import org.apache.spark.sql.{Column, DataFrame}
 
 /**
  * User Processor.
@@ -13,8 +13,9 @@ class UserProcessor extends User {
   private val TRUSTED_USERS = Props.get("datalake.trusted.users")
 
   def process(df: DataFrame): Unit = {
-    val users = filterCols(df)
-    parse(users)
+    val users = parse(filterCols(df))
+    users.printSchema
+    users
       .write
       .partitionBy(TAG)
       .mode("overwrite")
@@ -37,9 +38,15 @@ class UserProcessor extends User {
     SOLO_VICTORIES,
   )
 
-  private def parse(df: DataFrame): DataFrame = {
-    df.withColumn(TAG, regexp_replace(col(TAG), "%", ""))
-    // TODO: OrderBy "TAG" and "Consulted On"
-  }
+  private def parse(users: DataFrame): DataFrame =
+    users
+      .na.fill(0, Seq(POWER_PLAY_POINTS, HIGHEST_POWER_PLAY_POINTS))
+      .withColumn(TAG, regexp_replace(col(TAG), "%", ""))
+      .withColumn(BEST_TIME_AS_BIG_BRAWLER, toSeconds(BEST_TIME_AS_BIG_BRAWLER))
+      .withColumn(BEST_ROBO_RUMBLE_TIME, toSeconds(BEST_ROBO_RUMBLE_TIME))
+      .orderBy(TAG, CONSULTED_ON)
+
+  private def toSeconds(colName: String): Column =
+    col(colName) * lit(60)
 
 }

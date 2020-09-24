@@ -51,15 +51,9 @@ docker-compose exec bstars /app/app-collector/run.sh
 docker-compose exec bstars /app/app-processor/scripts/get-files.sh
 
 # 02 - Process files from transient zone
-docker-compose exec bstars /app/app-processor/run.sh local raw
+docker-compose exec bstars /app/app-processor/run.sh local raw trusted refined
 
-# 03 - Process files from raw zone
-docker-compose exec bstars /app/app-processor/run.sh local trusted
-
-# 04 - Process files from trusted zone
-docker-compose exec bstars /app/app-processor/run.sh local refined
-
-# 05 - Rename final file and put it into analytics zone
+# 03 - Rename final file and put it into analytics zone
 docker-compose exec bstars /app/app-processor/scripts/single-file.sh
 ```
 
@@ -96,7 +90,7 @@ Creating Cloud Pub/Sub Topic, Cloud Function, and Cloud Scheduler services
 
 
 ## Screenshots
-![screenshot](.docs/screenshot.png)
+![screenshot](.docs/screenshot.jpg)
 
 
 ## Related Links

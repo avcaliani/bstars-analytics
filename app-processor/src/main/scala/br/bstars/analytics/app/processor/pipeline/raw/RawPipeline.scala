@@ -15,13 +15,12 @@ class RawPipeline(spark: SparkSession) extends Pipeline {
   private val TRANSIENT_USERS = Props.get("datalake.transient.users")
   private val RAW_USERS = Props.get("datalake.raw.users")
 
-  override def run(): Unit = {
+  override def run(): Unit =
     spark.read
       .option("mode", "DROPMALFORMED")
       .json(TRANSIENT_USERS)
       .write
       .mode("overwrite")
       .json(RAW_USERS)
-  }
 
 }

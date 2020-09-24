@@ -1,5 +1,6 @@
 package br.bstars.analytics.app.processor.pipeline.refined
 
+import br.bstars.analytics.app.processor.data.User
 import br.bstars.analytics.app.processor.pipeline.Pipeline
 import br.bstars.analytics.app.processor.util.Props
 import org.apache.spark.sql.SparkSession
@@ -10,19 +11,19 @@ import org.apache.spark.sql.SparkSession
  *
  * @param spark Spark Session.
  */
-class RefinedPipeline(spark: SparkSession) extends Pipeline {
+class RefinedPipeline(spark: SparkSession) extends Pipeline with User {
 
   private val TRUSTED_USERS = Props.get("datalake.trusted.users")
   private val REFINED_USERS = Props.get("datalake.refined.users")
 
-  override def run(): Unit = {
+  override def run(): Unit =
     spark.read
       .parquet(TRUSTED_USERS)
+      .orderBy(TAG, CONSULTED_ON)
       .coalesce(1)
       .write
       .mode("overwrite")
       .option("header", "true")
       .csv(REFINED_USERS)
-  }
 
 }
